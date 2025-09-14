@@ -1,0 +1,261 @@
+import React, { useState } from 'react';
+import { Shield, Users, Menu, X, Home, BookOpen, Share2, List } from 'lucide-react';
+
+const BRRPWebsite = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const navigationItems = [
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'rules', label: 'Rules', icon: BookOpen },
+    { id: 'social', label: 'Social', icon: Share2 },
+    { id: 'command', label: 'Chain of Command', icon: List },
+  ];
+
+  const rules = [
+    { id: 1, title: 'Respect Everyone', description: 'Treat all players with respect. No discrimination, harassment, or hate speech of any kind.' },
+    { id: 2, title: 'Realistic Roleplay', description: 'Stay in character and maintain realistic scenarios. No trolling or unrealistic behavior.' },
+    { id: 3, title: 'Follow Border Procedures', description: 'Adhere to proper border control protocols and procedures at all times.' },
+    { id: 4, title: 'No Exploits', description: 'Do not use any exploits, hacks, or game-breaking glitches.' },
+    { id: 5, title: 'Proper Communication', description: 'Use appropriate radio communication protocols and clear language.' },
+    { id: 6, title: 'Listen to Superiors', description: 'Follow instructions from higher-ranking officers and administrators.' },
+  ];
+
+  const chainOfCommand = [
+    { rank: 'Owner', name: 'Murat', role: 'Founder & Head Administrator' },
+    { rank: 'Deputy Owner', name: 'Alex', role: 'Operations Manager' },
+    { rank: 'Chief of Border Security', name: 'Markus', role: 'Head of Security Operations' },
+    { rank: 'Senior Border Agent', name: 'Sarah', role: 'Training & Development' },
+    { rank: 'Border Agent', name: 'Thomas', role: 'Field Operations' },
+    { rank: 'Junior Agent', name: 'Lena', role: 'Trainee Supervisor' },
+  ];
+
+  const socialLinks = [
+    { name: 'Discord', url: '#', icon: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1cc44dea-9bd6-46a5-aee5-ce3b08f78100.png', alt: 'Discord server invite link with blue logo' },
+    { name: 'Roblox Group', url: '#', icon: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4500da8c-4888-46ea-998a-f9474f19f0d3.png', alt: 'Roblox group page with red logo' },
+    { name: 'YouTube', url: '#', icon: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b3902bc6-ba7c-4da4-986f-92eb374952b6.png', alt: 'YouTube channel with red play button logo' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <Shield className="h-8 w-8" />
+            <h1 className="text-xl font-bold">BRRP Border Roleplay</h1>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-6">
+            {navigationItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+                className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors ${
+                  activeSection === item.id ? 'bg-blue-700' : 'hover:bg-blue-800'
+                }`}
+              >
+                <item.icon className="h-4 w-4" />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-blue-800 px-4 py-2">
+            <nav className="flex flex-col space-y-2">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setActiveSection(item.id);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                    activeSection === item.id ? 'bg-blue-700' : 'hover:bg-blue-600'
+                  }`}
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        )}
+      </header>
+
+      <main className="container mx-auto px-4 py-8">
+        {/* Home Section */}
+        {activeSection === 'home' && (
+          <div className="space-y-12">
+            {/* Hero Section */}
+            <section className="text-center py-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg text-white p-8">
+              <h2 className="text-4xl font-bold mb-4">Welcome to BRRP Border Roleplay</h2>
+              <p className="text-xl mb-6">The Premier Emergency Hamburg Border Roleplay Experience on Roblox</p>
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+                <p className="text-lg">
+                  Experience the most realistic border control roleplay in Roblox. Join our dedicated community of roleplayers 
+                  and immerse yourself in the world of border security operations.
+                </p>
+              </div>
+            </section>
+
+            {/* Founder Section */}
+            <section className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-3xl font-bold text-center mb-8 text-blue-900">Our Founder</h2>
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0">
+                  <img 
+                    src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/59dea73b-5002-459d-b640-86b2853f52eb.png" 
+                    alt="Portrait of Murat, founder of BRRP Border Roleplay, wearing formal attire" 
+                    className="w-48 h-48 rounded-full object-cover border-4 border-blue-600 shadow-lg"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-semibold text-blue-800 mb-2">Murat</h3>
+                  <p className="text-gray-700 text-lg mb-4">
+                    Founder and passionate leader of BRRP Border Roleplay. With years of experience in Roblox roleplay communities, 
+                    Murat established BRRP to create the most authentic border control experience possible.
+                  </p>
+                  <p className="text-gray-600">
+                    "Our goal is to provide a professional, fun, and immersive environment where players can experience 
+                    the challenges and rewards of border security operations in a respectful community."
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Features Section */}
+            <section className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                <Users className="h-12 w-12 mx-auto text-blue-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Active Community</h3>
+                <p className="text-gray-600">Join hundreds of dedicated roleplayers in our growing community</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                <Shield className="h-12 w-12 mx-auto text-blue-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Professional Experience</h3>
+                <p className="text-gray-600">Realistic border procedures and professional roleplay environment</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                <span className="text-2xl">🇩🇪</span>
+                <h3 className="text-xl font-semibold mb-2">Emergency Hamburg</h3>
+                <p className="text-gray-600">Based in the immersive Emergency Hamburg map for authentic German border experience</p>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* Rules Section */}
+        {activeSection === 'rules' && (
+          <section className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-3xl font-bold text-center mb-8 text-blue-900">Community Rules</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {rules.map((rule) => (
+                <div key={rule.id} className="border-l-4 border-blue-600 pl-4 py-2">
+                  <h3 className="text-xl font-semibold text-blue-800 mb-2">{rule.title}</h3>
+                  <p className="text-gray-700">{rule.description}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-blue-800 font-semibold">
+                Note: Failure to follow these rules may result in warnings, temporary suspension, or permanent banning from our community.
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* Social Links Section */}
+        {activeSection === 'social' && (
+          <section className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-3xl font-bold text-center mb-8 text-blue-900">Connect With Us</h2>
+            <div className="flex flex-wrap justify-center gap-6">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  className="flex flex-col items-center p-6 bg-gray-100 rounded-lg hover:bg-blue-100 transition-colors min-w-[120px]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img 
+                    src={social.icon} 
+                    alt={social.alt}
+                    className="w-12 h-12 mb-2 rounded"
+                  />
+                  <span className="font-semibold text-blue-800">{social.name}</span>
+                </a>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <p className="text-gray-600">
+                Join our community today and stay updated with the latest news, events, and announcements!
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* Chain of Command Section */}
+        {activeSection === 'command' && (
+          <section className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-3xl font-bold text-center mb-8 text-blue-900">Chain of Command</h2>
+            <div className="space-y-4 max-w-2xl mx-auto">
+              {chainOfCommand.map((person, index) => (
+                <div 
+                  key={index} 
+                  className={`flex items-center p-4 rounded-lg border ${
+                    index === 0 
+                      ? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white' 
+                      : index % 2 === 0 
+                        ? 'bg-blue-100' 
+                        : 'bg-white'
+                  } ${index === 0 ? 'border-blue-800' : 'border-blue-200'} shadow-sm`}
+                >
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    index === 0 ? 'bg-blue-600' : 'bg-blue-500 text-white'
+                  } mr-4 font-bold`}>
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`font-semibold ${index === 0 ? 'text-white' : 'text-blue-800'}`}>
+                      {person.rank}: {person.name}
+                    </h3>
+                    <p className={index === 0 ? 'text-blue-100' : 'text-gray-600'}>{person.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </main>
+
+      <footer className="bg-blue-900 text-white py-8 mt-12">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex justify-center items-center mb-4">
+            <Shield className="h-8 w-8 mr-2" />
+            <span className="text-xl font-bold">BRRP Border Roleplay</span>
+          </div>
+          <p className="text-blue-200">© {new Date().getFullYear()} BRRP Border Roleplay. All rights reserved.</p>
+          <p className="text-blue-200 mt-2">The best border roleplay experience in Emergency Hamburg on Roblox</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default BRRPWebsite;
